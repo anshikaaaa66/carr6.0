@@ -1,0 +1,113 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: hsl(0, 0%, 100%);
+    --foreground: hsl(222.2, 84%, 4.9%);
+    --primary: hsl(222.2, 47.4%, 11.2%);
+    --primary-foreground: hsl(210, 40%, 98%);
+    --border: hsl(214.3, 31.8%, 91.4%);
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: hsl(222.2, 84%, 4.9%);
+    --foreground: hsl(210, 40%, 98%);
+    --primary: hsl(210, 40%, 98%);
+    --primary-foreground: hsl(222.2, 47.4%, 11.2%);
+    --border: hsl(217.2, 32.6%, 17.5%);
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+  }
+
+  .card {
+    @apply bg-card text-card-foreground rounded-lg;
+    padding: var(--spacing-md);
+    @apply dark:bg-card dark:text-card-foreground;
+  }
+
+  .scroll-container {
+    scroll-snap-type: x mandatory;
+  }
+
+  .scroll-item {
+    scroll-snap-align: start;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  /* Navbar Animation Styles */
+  @keyframes gradient-x {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 100% 50%;
+    }
+  }
+
+  @keyframes slide-in {
+    from {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .animate-gradient-x {
+    background-size: 200% 200%;
+    animation: gradient-x 15s ease infinite;
+  }
+
+  .navbar-menu {
+    @apply hidden md:flex flex-row gap-5;
+    animation: fade-in 0.5s ease-out;
+    position: relative;
+  }
+
+  .navbar-menu-item {
+    @apply text-gray-200 transition-colors duration-300;
+    position: relative;
+    overflow: hidden;
+    padding: 10px 20px;
+    border-radius: 0.5rem;
+  }
+
+  .navbar-menu-item::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 0%;
+    background-color: white;
+    transition: width 0.3s ease, background-color 0.3s ease;
+  }
+
+  .navbar-menu-item:hover::before {
+    width: 100%;
+  }
+
+  .navbar-menu-item:hover {
+    @apply text-white;
+  }
+}
